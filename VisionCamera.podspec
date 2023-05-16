@@ -2,9 +2,9 @@ require "json"
 
 package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
-nodeModules = Dir.exist?(File.join(__dir__, "node_modules")) ? File.join(__dir__, "node_modules") : File.join(__dir__, "..", "..", "node_modules")
+nodeModules = Dir.exist?(File.join(__dir__, "node_modules")) ? File.join(__dir__, "node_modules") : File.join(__dir__, "..")
 skiaPath = File.join(nodeModules, "@shopify", "react-native-skia")
-hasSkia = Dir.exist?(skiaPath)
+hasSkia = File.exist?(skiaPath)
 puts "VisionCamera: Skia integration #{hasSkia ? "enabled" : "disabled"}!"
 
 reactVersion = '0.0.0'
