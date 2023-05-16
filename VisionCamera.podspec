@@ -2,12 +2,9 @@ require "json"
 
 package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
-isEasBuild = ENV["EAS_BUILD"] ? ENV["EAS_BUILD"] == "true" : false
-easNodeModules = ENV["EAS_BUILD_WORKINGDIR"] ? File.join(ENV["EAS_BUILD_WORKINGDIR"], "node_modules") : nil
-
-nodeModules = Dir.exist?(File.join(__dir__, "node_modules")) ? File.join(__dir__, "node_modules") : isEasBuild ? easNodeModules : File.join(__dir__, "..") # EAS Build: node_modules is in the working directory
+nodeModules = Dir.exist?(File.join(__dir__, "node_modules")) ? File.join(__dir__, "node_modules") : File.join(__dir__, "..")
 skiaPath = File.join(nodeModules, "@shopify", "react-native-skia")
-hasSkia = File.exist?(skiaPath)
+hasSkia = Dir.exist?(skiaPath) # Was file?
 puts "VisionCamera: Skia integration #{hasSkia ? "enabled" : "disabled"}!"
 
 reactVersion = '0.0.0'
